@@ -67,17 +67,17 @@ jobs:
       dotnet test $(testProject)
     displayName: 'Execute Tests'
 
-# - job: Image
-#   dependsOn: Test
-#   steps:
-#   - task: DownloadBuildArtifacts@0
-#     inputs:
-#       buildType: 'current'
-#       downloadType: 'single'
-#       artifactName: 'ADOBuildOutput'
-#       downloadPath: '$(Build.SourcesDirectory)'
-    
-#   - script: |
-#       echo "Creating image..."
-#       dotnet test $(testProject)
-#     displayName: 'Create Image'
+- job: Image
+  dependsOn: Test
+  steps:
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'ADOBuildOutput'
+      downloadPath: '$(Build.SourcesDirectory)'
+  
+  - script: |
+      echo "Creating image..."
+      dotnet test $(testProject)
+    displayName: 'Create Image'
