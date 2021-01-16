@@ -40,8 +40,6 @@ jobs:
 
   - script: |
       echo "Creating final application package..."
-      ls
-      cd product-api
       dotnet publish $(applicationProject) -o ./publish --configuration $(buildConfiguration)
     displayName: 'Package Application'
     
