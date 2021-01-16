@@ -26,17 +26,21 @@ jobs:
       packageType: sdk
 
   - script: |
-      echo "Restrieving external libraries..."
+      echo "Retrieving external libraries..."
+      ls -al
+      cd product-api
       dotnet restore
     displayName: 'Resolve Dependencies'
 
   - script: |
       echo "Building projects..."
+      cd product-api
       dotnet build --configuration $(buildConfiguration)
     displayName: 'Build Source'
 
   - script: |
       echo "Creating final application package..."
+      cd product-api
       dotnet publish $(applicationProject) -o ./publish --configuration $(buildConfiguration)
     displayName: 'Package Application'
     
