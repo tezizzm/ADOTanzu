@@ -11,5 +11,6 @@ spec:
     kind: ClusterBuilder
   source:
     git:
-      url: https://github.com/tezizzm/product-api.git
-      revision: master
+      url: https://github.com/tezizzm/ADOTanzu
+      revision: main
+    subPath: product-api
