@@ -1,0 +1,83 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  testProject: ./AzureDevOpsTest/AzureDevOpsTest.csproj
+  applicationProject: ./AzureDevOpsApp/AzureDevOpsApp.csproj
+  system.debug: true
+
+
+jobs:
+- job: Build
+  steps:
+  - task: UseDotNet@2
+    inputs:
+      version: '3.1.x'
+      packageType: sdk
+
+  - script: |
+      echo "Restrieving external libraries..."
+      dotnet restore
+    displayName: 'Resolve Dependencies'
+
+  - script: |
+      echo "Building projects..."
+      dotnet build --configuration $(buildConfiguration)
+    displayName: 'Build Source'
+
+  - script: |
+      echo "Creating final application package..."
+      dotnet publish $(applicationProject) -o ./publish --configuration $(buildConfiguration)
+    displayName: 'Package Application'
+    
+  - task: CopyFiles@2
+    inputs:
+      contents: publish/**
+      targetFolder: $(Build.ArtifactStagingDirectory)
+      CleanTargetFolder: true
+    displayName: 'Stage Application Package'
+    
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: $(Build.ArtifactStagingDirectory)
+      artifactName: ADOBuildOutput
+    displayName: 'Publish Build Package'
+    
+- job: Test
+  dependsOn: Build
+  steps:
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'ADOBuildOutput'
+      downloadPath: '$(Build.SourcesDirectory)'
+    
+  - script: |
+      echo "Running tests..."
+      dotnet test $(testProject)
+    displayName: 'Execute Tests'
+
+# - job: Image
+#   dependsOn: Test
+#   steps:
+#   - task: DownloadBuildArtifacts@0
+#     inputs:
+#       buildType: 'current'
+#       downloadType: 'single'
+#       artifactName: 'ADOBuildOutput'
+#       downloadPath: '$(Build.SourcesDirectory)'
+    
+#   - script: |
+#       echo "Creating image..."
+#       dotnet test $(testProject)
+#     displayName: 'Create Image'
