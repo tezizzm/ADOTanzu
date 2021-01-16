@@ -12,8 +12,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  testProject: ./AzureDevOpsTest/AzureDevOpsTest.csproj
-  applicationProject: ./AzureDevOpsApp/AzureDevOpsApp.csproj
+  testProject: ./product-api-test/bootcamp-webapi-test.csproj
+  applicationProject: ./product-api/bootcamp-webapi.csproj
   system.debug: true
 
 
