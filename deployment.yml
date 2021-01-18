@@ -18,6 +18,7 @@ spec:
       containers:
       - image: registry.contour.thewindyvalley.com/library/product-api
         name: product-api
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
           name: http
