@@ -25,7 +25,6 @@ jobs:
 
   - script: |
       echo "Retrieving external libraries..."
-      ls -al
       cd product-api
       dotnet restore
     displayName: 'Resolve Dependencies'
