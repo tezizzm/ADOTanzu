@@ -14,8 +14,6 @@ variables:
   buildConfiguration: 'Release'
   testProject: ./product-api-test/bootcamp-webapi-test.csproj
   applicationProject: ./product-api/bootcamp-webapi.csproj
-  system.debug: true
-
 
 jobs:
 - job: Build
