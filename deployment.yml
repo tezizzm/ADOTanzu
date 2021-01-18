@@ -16,7 +16,7 @@ spec:
         app: product-api
     spec:
       containers:
-      - image: registry.contour.thewindyvalley.com/library/product-api
+      - image: registry.contour.thewindyvalley.com/library/product-api:latest
         name: product-api
         imagePullPolicy: Always
         ports:
