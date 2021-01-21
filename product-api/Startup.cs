@@ -44,7 +44,7 @@ namespace bootcamp_webapi
                 {
                     document.Info.Version = apiSettings?.Version;
                     document.Info.Title = apiSettings?.Title;
-                    document.Info.Description = "A simple ASP.NET Core 3.1 web API";
+                    document.Info.Description = "A simple ASP.NET Core 3.1.9 web API";
                     document.Schemes.Clear();
                     document.Schemes.Add(NSwag.OpenApiSchema.Https);
                 };
