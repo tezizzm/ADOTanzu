@@ -85,7 +85,7 @@ jobs:
       downloadPath: '$(Build.SourcesDirectory)'
 
   - script: |
-      kp image create product-api --tag registry.contour.thewindyvalley.com/library/product-api --cluster-builder base --namespace builds --wait --local-path $(applicationProject)
+      kp image create product-api --tag registry.contour.thewindyvalley.com/library/product-api --cluster-builder base --namespace builds ----registry-verify-certs --wait --local-path $(applicationProject)
   
   - script: |
       echo "Creating image..."
