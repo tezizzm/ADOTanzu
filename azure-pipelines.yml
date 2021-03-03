@@ -8,7 +8,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'kpack-pool'
 
 variables:
   buildConfiguration: 'Release'
