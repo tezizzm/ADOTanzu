@@ -7,7 +7,8 @@
 trigger:
 - main
 
-pool: 'kpack-pool'  
+pool:
+  vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -69,13 +70,22 @@ jobs:
 
 - job: Image
   dependsOn: Test
+  pool:
+    name: kpack-cli
   steps:
-  - task: KubernetesManifest@0
+  - script: |
+      echo "Retrieving Build Artifacts..."
+    displayName: 'Retrieve Build Artifacts'
+
+  - task: DownloadBuildArtifacts@0
     inputs:
-      action: 'deploy'
-      kubernetesServiceConnection: 'dev-builds-1610766962428'
-      namespace: 'builds'
-      manifests: './image.yml'
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'ADOBuildOutput'
+      downloadPath: '$(Build.SourcesDirectory)'
+
+  - script: |
+      kp image create spring-petclinic --tag registry.contour.thewindyvalley.com/library/product-api --cluster-builder base --namespace builds --wait --local-path $(applicationProject)
   
   - script: |
       echo "Creating image..."
