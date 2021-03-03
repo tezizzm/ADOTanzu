@@ -7,8 +7,7 @@
 trigger:
 - main
 
-pool:
-  name: 'kpack-pool'  
+pool: 'kpack-pool'  
 
 variables:
   buildConfiguration: 'Release'
@@ -81,3 +80,4 @@ jobs:
   - script: |
       echo "Creating image..."
     displayName: 'Create Image'
+
