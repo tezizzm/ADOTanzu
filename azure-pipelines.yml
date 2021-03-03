@@ -71,7 +71,7 @@ jobs:
 - job: Image
   dependsOn: Test
   pool:
-    name: kpack-pool
+    name: 'kpack pool'
   steps:
   - script: |
       echo "Retrieving Build Artifacts..."
