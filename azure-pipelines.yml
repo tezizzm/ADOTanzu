@@ -86,7 +86,7 @@ jobs:
 
   - script: |
       cd .\ADOBuildOutput\publish
-      kp image create product-api --tag registry.contour.thewindyvalley.com/library/product-api --cluster-builder base --namespace builds --registry-verify-certs false --local-path .
+      kp image create product-api --tag=registry.contour.thewindyvalley.com/library/product-api --cluster-builder=base --namespace=builds --registry-verify-certs=false --local-path=.
   
   - script: |
       echo "Creating image..."
