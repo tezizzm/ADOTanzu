@@ -25,26 +25,26 @@ namespace bootcamp_webapi
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-                .ConfigureAppConfiguration((context, builder) =>
-                {
-                    builder.AddKubernetes(loggerFactory: GetLoggerFactory());
-                    //if (Platform.IsKubernetes)
-                    //{
-                    //}
-                })
+                // .ConfigureAppConfiguration((context, builder) =>
+                // {
+                //     builder.AddKubernetes(loggerFactory: GetLoggerFactory());
+                //     //if (Platform.IsKubernetes)
+                //     //{
+                //     //}
+                // })
                 .UseCloudHosting()
                 .AddKubernetesActuators();
 
-        private static ILoggerFactory GetLoggerFactory()
-        {
-            IServiceCollection serviceCollection = new ServiceCollection();
-            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
-            serviceCollection.AddLogging(builder => builder.AddConsole((opts) =>
-            {
-                opts.DisableColors = true;
-            }));
-            serviceCollection.AddLogging(builder => builder.AddDebug());
-            return serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
-        }
+        // private static ILoggerFactory GetLoggerFactory()
+        // {
+        //     IServiceCollection serviceCollection = new ServiceCollection();
+        //     serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
+        //     serviceCollection.AddLogging(builder => builder.AddConsole((opts) =>
+        //     {
+        //         opts.DisableColors = true;
+        //     }));
+        //     serviceCollection.AddLogging(builder => builder.AddDebug());
+        //     return serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+        // }
     }
 }
