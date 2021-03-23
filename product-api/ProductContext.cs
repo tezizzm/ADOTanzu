@@ -18,11 +18,11 @@ namespace bootcamp_webapi
         {
             var products = new[]
             {
-                new {Id = 1L, Category = "Books", Inventory = 5, Name="The Ultimate Guide To Budget Travel"},
-                new {Id = 2L, Category = "Sports", Inventory = 4, Name="Upper Deck Baseball Set"},
-                new {Id = 3L, Category = "Groceries", Inventory = 2, Name="Gatorade"},
-                new {Id = 4L, Category = "Electronics", Inventory = 50, Name="Google Pixel 3"},
-                new {Id = 5L, Category = "Home and Garden", Inventory = 20, Name="Kitchenette Stand Mixer"}
+                new {Id = 1L, Category = "Derivatives and Options", Inventory = 20, Name="Forwards"},
+                new {Id = 2L, Category = "Contract", Inventory = 4, Name="Futures"},
+                new {Id = 3L, Category = "Bond", Inventory = 2, Name="Government Bonds"},
+                new {Id = 4L, Category = "Bond", Inventory = 50, Name="Corporate Bonds"},
+                new {Id = 5L, Category = "High Net Worth", Inventory = 5, Name="Hedge Funds"}
             };
 
             modelBuilder.Entity<Product>().HasData(products);
