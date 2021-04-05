@@ -70,22 +70,13 @@ jobs:
 
 - job: Image
   dependsOn: Test
-  pool:
-    name: 'kpack pool'
   steps:
-  - script: |
-      echo "Retrieving Build Artifacts..."
-    displayName: 'Retrieve Build Artifacts'
-  - task: DownloadBuildArtifacts@0
+  - task: KubernetesManifest@0
     inputs:
-      buildType: 'current'
-      downloadType: 'single'
-      artifactName: 'ADOBuildOutput'
-      downloadPath: '$(Build.SourcesDirectory)'
-
-  - script: |
-      cd .\ADOBuildOutput\publish
-      kp image create product-api --tag=registry.contour.thewindyvalley.com/library/product-api --cluster-builder=base --namespace=builds --registry-verify-certs=false --local-path=.
+      action: 'deploy'
+      kubernetesServiceConnection: 'dev-builds-1610766962428'
+      namespace: 'builds'
+      manifests: './image.yml'
 
   - script: |
       echo "Creating image..."
